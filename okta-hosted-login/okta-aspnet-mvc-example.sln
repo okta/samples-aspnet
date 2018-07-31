@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okta-aspnet-mvc-example", "okta-aspnet-mvc-example\okta-aspnet-mvc-example.csproj", "{73EB0D9D-07D5-48E4-908F-7A5DBA3DC8BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73EB0D9D-07D5-48E4-908F-7A5DBA3DC8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73EB0D9D-07D5-48E4-908F-7A5DBA3DC8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73EB0D9D-07D5-48E4-908F-7A5DBA3DC8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73EB0D9D-07D5-48E4-908F-7A5DBA3DC8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED2A607F-B4A9-4D5C-BF48-4B0AB08B2948}
+	EndGlobalSection
+EndGlobal
