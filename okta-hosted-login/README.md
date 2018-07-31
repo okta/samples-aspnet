@@ -1,6 +1,6 @@
 # ASP.NET MVC & Okta-Hosted Login Page Example
 
-This example shows you how to use the [OIDC Middleware Library] to login a user.  The login is achieved through the [Authorization Code Flow], where the user is redirected to the Okta-Hosted login page.  After the user authenticates, they are redirected back to the application. ASP.NET automatically populates `HttpContext.User` with the information Okta sends back about the user.
+This example shows you how to use the `Okta.AspNet` library to log in a user. The user's browser is first redirected to the Okta-hosted login page. After the user authenticates, they are redirected back to your application. ASP.NET MVC automatically populates `HttpContext.User` with the information Okta sends back about the user.
 
 
 ## Prerequisites

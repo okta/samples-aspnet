@@ -1,4 +1,4 @@
-# ASP.NET MVC 4.x OAuth Sample Applications for Okta
+# ASP.NET MVC 4.x Sample Applications for Okta
 
 This repository contains several sample applications that show you how to integrate various Okta use-cases into your ASP.NET MVC applications.
 
