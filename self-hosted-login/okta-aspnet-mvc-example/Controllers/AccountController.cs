@@ -1,6 +1,6 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
+using Okta.AspNet;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,7 +20,8 @@ namespace okta_aspnet_mvc_example.Controllers
                 properties.RedirectUri = "/Home/About";
 
                 HttpContext.GetOwinContext().Authentication.Challenge(properties,
-                    OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                    OktaDefaults.MvcAuthenticationType);
+
                 return new HttpUnauthorizedResult();
             }
 
@@ -40,7 +41,7 @@ namespace okta_aspnet_mvc_example.Controllers
             {
                 HttpContext.GetOwinContext().Authentication.SignOut(
                     CookieAuthenticationDefaults.AuthenticationType,
-                    OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                    OktaDefaults.MvcAuthenticationType);
             }
 
             return RedirectToAction("Index", "Home");
