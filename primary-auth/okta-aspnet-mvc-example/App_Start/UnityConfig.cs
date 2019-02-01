@@ -1,9 +1,12 @@
+using System.Configuration;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using Microsoft.Owin.Security;
 using System.Web;
 using System.Diagnostics.CodeAnalysis;
+using Okta.Auth.Sdk;
+using Okta.Sdk.Abstractions.Configuration;
 
 namespace okta_aspnet_mvc_example
 {
@@ -19,7 +22,12 @@ namespace okta_aspnet_mvc_example
             
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication));
-
+            container.RegisterType<IAuthenticationClient>(new InjectionFactory(o => new AuthenticationClient(
+                new OktaClientConfiguration()
+                {
+                    OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
+                    Token = ConfigurationManager.AppSettings["okta:Token"],
+                })));
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

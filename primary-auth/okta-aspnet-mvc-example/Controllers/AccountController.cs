@@ -14,10 +14,12 @@ namespace okta_aspnet_mvc_example.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthenticationManager _authenticationManager;
+        private readonly IAuthenticationClient _oktaAuthenticationClient;
 
-        public AccountController(IAuthenticationManager authenticationManager)
+        public AccountController(IAuthenticationManager authenticationManager, IAuthenticationClient oktaAuthenticationClient)
         {
-            this._authenticationManager = authenticationManager;
+            _authenticationManager = authenticationManager;
+            _oktaAuthenticationClient = oktaAuthenticationClient;
         }
 
         // GET: Account
@@ -35,14 +37,7 @@ namespace okta_aspnet_mvc_example.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-
-            var authClient = new AuthenticationClient(
-                new OktaClientConfiguration
-                {
-                    OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
-                    Token = ConfigurationManager.AppSettings["okta:Token"],
-                });
-                        
+            
             var authnOptions = new AuthenticateOptions()
             {
                 Username = model.UserName,
@@ -51,19 +46,25 @@ namespace okta_aspnet_mvc_example.Controllers
 
             try
             {
-                var authnResponse = await authClient.AuthenticateAsync(authnOptions);
+                var authnResponse = await _oktaAuthenticationClient.AuthenticateAsync(authnOptions);
 
                 if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                 {
                     var identity = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, model.UserName),},
                         DefaultAuthenticationTypes.ApplicationCookie);
 
-                    this._authenticationManager.SignIn(new AuthenticationProperties
+                    _authenticationManager.SignIn(new AuthenticationProperties
                     {
                         IsPersistent = model.RememberMe
                     }, identity);
 
                     return RedirectToAction("Index", "Home");
+                }
+                else if (authnResponse.AuthenticationStatus == AuthenticationStatus.PasswordExpired)
+                {
+                    Session["stateToken"] = authnResponse.StateToken;
+
+                    return RedirectToAction("ChangePassword", "Manage");
                 }
                 else
                 {
