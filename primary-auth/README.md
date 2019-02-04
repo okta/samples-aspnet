@@ -1,6 +1,12 @@
 # ASP.NET MVC & Okta Authentication SDK Example
 
-This example shows you how to use the `Okta.Auth.Sdk` library to log in a user. The user's browser is first redirected to the self-hosted login page on your ASP.NET MVC application. Once the user is successfully authenticated via Okta, a `ClaimsIdentity` is created with the user's information.
+This example shows you how to use the `Okta.Auth.Sdk` library to:
+
+* Log in a user 
+* Change a user's password (only if the password has expired)
+
+The user's browser is first redirected to the self-hosted login page on your ASP.NET MVC application. Once the user is successfully authenticated via Okta, a `ClaimsIdentity` is created with the user's information.
+If the user's password has expired, the user will be redirected to a change password form.
 
 ## Prerequisites
 
