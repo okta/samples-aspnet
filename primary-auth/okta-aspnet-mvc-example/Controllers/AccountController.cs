@@ -83,7 +83,7 @@ namespace okta_aspnet_mvc_example.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            this._authenticationManager.SignOut();
+            _authenticationManager.SignOut();
             return RedirectToAction("Login", "Account");
         }
 
