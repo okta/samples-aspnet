@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Web;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -18,8 +14,7 @@ namespace okta_aspnet_mvc_example
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

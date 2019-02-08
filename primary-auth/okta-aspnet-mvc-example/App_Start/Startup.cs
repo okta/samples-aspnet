@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Web;
 
 namespace okta_aspnet_mvc_example
 {
     [ExcludeFromCodeCoverage]
+#pragma warning disable SA1601 // Partial elements should be documented
     public partial class Startup
+#pragma warning restore SA1601 // Partial elements should be documented
     {
         public void ConfigureAuth(IAppBuilder app)
         {

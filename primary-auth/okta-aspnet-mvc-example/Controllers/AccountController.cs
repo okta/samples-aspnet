@@ -1,13 +1,11 @@
-﻿using System.Configuration;
-using okta_aspnet_mvc_example.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using Okta.Auth.Sdk;
 using Okta.Sdk.Abstractions;
-using Okta.Sdk.Abstractions.Configuration;
+using okta_aspnet_mvc_example.Models;
 
 namespace okta_aspnet_mvc_example.Controllers
 {
@@ -33,11 +31,13 @@ namespace okta_aspnet_mvc_example.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        public async Task<ActionResult> LoginAsync(LoginViewModel model)
         {
             if (!ModelState.IsValid)
+            {
                 return View();
-            
+            }
+
             var authnOptions = new AuthenticateOptions()
             {
                 Username = model.UserName,
@@ -46,17 +46,15 @@ namespace okta_aspnet_mvc_example.Controllers
 
             try
             {
-                var authnResponse = await _oktaAuthenticationClient.AuthenticateAsync(authnOptions);
+                var authnResponse = await _oktaAuthenticationClient.AuthenticateAsync(authnOptions).ConfigureAwait(false);
 
                 if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                 {
-                    var identity = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, model.UserName),},
+                    var identity = new ClaimsIdentity(
+                        new[] { new Claim(ClaimTypes.Name, model.UserName) },
                         DefaultAuthenticationTypes.ApplicationCookie);
 
-                    _authenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = model.RememberMe
-                    }, identity);
+                    _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, identity);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -68,13 +66,13 @@ namespace okta_aspnet_mvc_example.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", $"Invalid login attempt: {authnResponse.AuthenticationStatus}");
+                    ModelState.AddModelError(string.Empty, $"Invalid login attempt: {authnResponse.AuthenticationStatus}");
                     return View(model);
                 }
             }
             catch (OktaApiException exception)
             {
-                ModelState.AddModelError("", $"Invalid login attempt: {exception.ErrorSummary}");
+                ModelState.AddModelError(string.Empty, $"Invalid login attempt: {exception.ErrorSummary}");
                 return View(model);
             }
         }
@@ -86,6 +84,5 @@ namespace okta_aspnet_mvc_example.Controllers
             _authenticationManager.SignOut();
             return RedirectToAction("Login", "Account");
         }
-
     }
 }

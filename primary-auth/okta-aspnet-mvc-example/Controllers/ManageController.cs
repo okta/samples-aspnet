@@ -1,10 +1,8 @@
-﻿using System.Configuration;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using okta_aspnet_mvc_example.Models;
 using Okta.Auth.Sdk;
 using Okta.Sdk.Abstractions;
-using Okta.Sdk.Abstractions.Configuration;
+using okta_aspnet_mvc_example.Models;
 
 namespace okta_aspnet_mvc_example.Controllers
 {
@@ -23,25 +21,22 @@ namespace okta_aspnet_mvc_example.Controllers
             return View();
         }
 
-        //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-
-        //
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> ChangePasswordAsync(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            
+
             var changePasswordOptions = new ChangePasswordOptions()
             {
                 OldPassword = model.OldPassword,
@@ -51,21 +46,19 @@ namespace okta_aspnet_mvc_example.Controllers
 
             try
             {
-                var authnResponse = await _oktaAuthenticationClient.ChangePasswordAsync(changePasswordOptions);
+                var authnResponse = await _oktaAuthenticationClient.ChangePasswordAsync(changePasswordOptions).ConfigureAwait(false);
 
                 if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                 {
                     return RedirectToAction("Login", "Account");
                 }
-                else
-                {
-                    ModelState.AddModelError("Oops! Something went wrong:", authnResponse.AuthenticationStatus);
-                    return View(model);
-                }
+
+                ModelState.AddModelError("Oops! Something went wrong:", authnResponse.AuthenticationStatus);
+                return View(model);
             }
             catch (OktaApiException exception)
             {
-                ModelState.AddModelError("", exception.ErrorSummary);
+                ModelState.AddModelError(string.Empty, exception.ErrorSummary);
                 return View(model);
             }
         }
