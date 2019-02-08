@@ -28,7 +28,7 @@ namespace okta_aspnet_mvc_example.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("ChangePassword", model);
             }
 
             var changePasswordOptions = new ChangePasswordOptions()
@@ -48,12 +48,12 @@ namespace okta_aspnet_mvc_example.Controllers
                 }
 
                 ModelState.AddModelError("Oops! Something went wrong:", authnResponse.AuthenticationStatus);
-                return View(model);
+                return View("ChangePassword", model);
             }
             catch (OktaApiException exception)
             {
                 ModelState.AddModelError(string.Empty, exception.ErrorSummary);
-                return View(model);
+                return View("ChangePassword", model);
             }
         }
     }

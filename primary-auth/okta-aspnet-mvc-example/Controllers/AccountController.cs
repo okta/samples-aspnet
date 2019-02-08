@@ -35,7 +35,7 @@ namespace okta_aspnet_mvc_example.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("Login");
             }
 
             var authnOptions = new AuthenticateOptions()
@@ -67,13 +67,13 @@ namespace okta_aspnet_mvc_example.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, $"Invalid login attempt: {authnResponse.AuthenticationStatus}");
-                    return View(model);
+                    return View("Login", model);
                 }
             }
             catch (OktaApiException exception)
             {
                 ModelState.AddModelError(string.Empty, $"Invalid login attempt: {exception.ErrorSummary}");
-                return View(model);
+                return View("Login", model);
             }
         }
 
