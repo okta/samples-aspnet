@@ -15,12 +15,6 @@ namespace okta_aspnet_mvc_example.Controllers
             _oktaAuthenticationClient = oktaAuthenticationClient;
         }
 
-        // GET: Manage
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
