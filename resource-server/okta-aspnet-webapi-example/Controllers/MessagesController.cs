@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
@@ -10,7 +9,7 @@ namespace okta_aspnet_webapi_example.Controllers
     {
         [HttpGet]
         [Route("~/api/messages")]
-        public IEnumerable<dynamic> Get()
+        public IHttpActionResult Get()
         {
             var principal = RequestContext.Principal.Identity as ClaimsIdentity;
 
@@ -18,11 +17,14 @@ namespace okta_aspnet_webapi_example.Controllers
                 .SingleOrDefault(c => c.Type == System.IdentityModel.Claims.ClaimTypes.NameIdentifier)
                 ?.Value;
 
-            return new dynamic[]
+            return Json(new
             {
-                new { Date = DateTime.Now, Text = "I am a Robot." },
-                new { Date = DateTime.Now, Text = "Hello, world!" },
-            };
+                messages = new dynamic[]
+                {
+                    new { date = DateTime.Now, text = "I am a Robot." },
+                    new { date = DateTime.Now, text = "Hello, world!" },
+                }
+            });
         }
     }
 }
