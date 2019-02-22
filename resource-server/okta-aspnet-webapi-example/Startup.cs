@@ -13,8 +13,7 @@ namespace okta_aspnet_webapi_example
         {
             app.UseOktaWebApi(new OktaWebApiOptions()
             {
-                OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
-                ClientId = ConfigurationManager.AppSettings["okta:ClientId"],
+                OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"]
             });
         }
     }
