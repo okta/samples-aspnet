@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using System.Net;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(okta_aspnet_mvc_example.Startup))]
@@ -12,6 +13,8 @@ namespace okta_aspnet_mvc_example
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
     }
 }
