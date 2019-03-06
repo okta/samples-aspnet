@@ -9,6 +9,7 @@ namespace okta_aspnet_webapi_example.Controllers
     {
         [HttpGet]
         [Route("~/api/messages")]
+        [Authorize]
         public IHttpActionResult Get()
         {
             var principal = RequestContext.Principal.Identity as ClaimsIdentity;
