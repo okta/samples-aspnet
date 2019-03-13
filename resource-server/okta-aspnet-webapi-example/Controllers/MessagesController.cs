@@ -4,12 +4,14 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+#pragma warning disable SA1300 // Element should begin with upper-case letter
 namespace okta_aspnet_webapi_example.Controllers
+#pragma warning restore SA1300 // Element should begin with upper-case letter
 {
     public class MessagesController : ApiController
     {
         // The CORS policy is open for testing purposes. In a production application, you should restrict it to known origins.
-        [EnableCors(origins:"*", headers:"*", methods:"*")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("~/api/messages")]
         [Authorize]
         [HttpGet]
@@ -27,7 +29,7 @@ namespace okta_aspnet_webapi_example.Controllers
                 {
                     new { date = DateTime.Now, text = "I am a Robot." },
                     new { date = DateTime.Now, text = "Hello, world!" },
-                }
+                },
             });
         }
     }
