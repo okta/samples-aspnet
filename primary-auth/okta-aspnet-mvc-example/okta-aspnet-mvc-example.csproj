@@ -92,10 +92,10 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Okta.Auth.Sdk, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okta.Auth.Sdk.1.0.1-beta\lib\netstandard1.3\Okta.Auth.Sdk.dll</HintPath>
+      <HintPath>..\packages\Okta.Auth.Sdk.1.0.1\lib\netstandard1.3\Okta.Auth.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="Okta.Sdk.Abstractions, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okta.Sdk.Abstractions.1.0.1-beta\lib\netstandard1.3\Okta.Sdk.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Okta.Sdk.Abstractions.1.0.1\lib\netstandard1.3\Okta.Sdk.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
