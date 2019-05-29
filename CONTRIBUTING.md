@@ -24,7 +24,7 @@ On your computer, follow these steps to setup a local repository for working on 
 
 ``` bash
 $ git clone https://github.com/YOUR_ACCOUNT/samples-aspnet.git
-$ cd okta-aspnet
+$ cd samples-aspnet
 $ git remote add upstream https://github.com/okta/samples-aspnet.git
 $ git checkout master
 $ git fetch upstream
@@ -35,7 +35,7 @@ $ git rebase upstream/master
 Making changes
 --------------
 
-It is important that you create a new branch to make changes on and that you do not change the `master` branch (other than to rebase in changes from `upstream/master`).  In this example I will assume you will be making your changes to a branch called `feature_x`.  This `feature_x` branch will be created on your local repository and will be pushed to your forked repository on GitHub.  Once this branch is on your fork you will create a Pull Request for the changes to be added to the Okta ASP.NET SDK project.
+It is important that you create a new branch to make changes on and that you do not change the `master` branch (other than to rebase in changes from `upstream/master`).  In this example I will assume you will be making your changes to a branch called `feature_x`.  This `feature_x` branch will be created on your local repository and will be pushed to your forked repository on GitHub.  Once this branch is on your fork you will create a Pull Request for the changes to be added to the Okta ASP.NET Samples.
 
 It is best practice to create a new branch each time you want to contribute to the project and only track the changes for that pull request in this branch.
 
