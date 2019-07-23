@@ -249,9 +249,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\AccessDenied.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
-    <Content Include="Views\Home\Protected.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
