@@ -35,13 +35,13 @@
                         <a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log out</a>
                     </li>
                 </ul>
-                            <form action="/Account/Logout" method="post" id="logout_form"></form>
+                <form action="/Account/Logout" method="post" id="logout_form"></form>
                 }
                 else
                 {
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>@Html.ActionLink("Log in", "Login", "Account")</li>
-                            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+                    </ul>
                 }
             </div>
         </div>
