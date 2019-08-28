@@ -25,7 +25,6 @@ namespace okta_aspnet_mvc_example.Controllers
             }
 
             return RedirectToAction("Index", "Home");
-
         }
 
         public ActionResult Login()

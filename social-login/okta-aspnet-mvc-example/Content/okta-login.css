@@ -1,6 +1,11 @@
 ﻿/* Uses okta-signin-widget version 2.13.0 */
 #okta-sign-in .default-custom-button {
     border: 1px solid #c3c3c3;
+    
+}
+
+#okta-sign-in .default-custom-button.link-button {
+    text-align: inherit;
 }
 
 #okta-sign-in.auth-container.main-container {
