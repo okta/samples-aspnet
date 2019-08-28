@@ -11,7 +11,7 @@ Before running this sample, you will need the following:
 * An Okta Application, configured for Web mode. This is done from the Okta Developer Console and you can find instructions [here][OIDC Web Application Setup Instructions].  When following the wizard, use the default properties.  They are designed to work with our sample applications.
 * The desired identity providers configured in Okta. This is done from the Okta Developer Console and you can find instructions [here](https://developer.okta.com/docs/guides/add-an-external-idp/).
 
-**Note:** Make sure to add `http://localhost:8080` as a [Trusted Origin].
+> **Note:** Make sure to add `http://localhost:8080` as a [Trusted Origin].
 
 
 ## Running This Example
@@ -26,7 +26,7 @@ If you see a home page that allows you to log in, then things are working!  Clic
 
 If you want to log in via Okta, you can log in with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
-**Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org. When you log in via Okta, you will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
+> **Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org. When you log in via Okta, you will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
 
 [OIDC Middleware Library]: https://github.com/okta/okta-aspnet
 [Authorization Code Flow]: https://developer.okta.com/authentication-guide/implementing-authentication/auth-code
