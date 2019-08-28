@@ -1,12 +1,11 @@
 ﻿/* Uses okta-signin-widget version 2.13.0 */
 #okta-sign-in .default-custom-button {
     border: 1px solid #c3c3c3;
-    
 }
 
-#okta-sign-in .default-custom-button.link-button {
-    text-align: inherit;
-}
+    #okta-sign-in .default-custom-button.link-button {
+        text-align: inherit;
+    }
 
 #okta-sign-in.auth-container.main-container {
     /* -- Fonts and Text Colors -- */
@@ -643,47 +642,15 @@
     border-color: rgba(0, 0, 0, 0.2);
 }
 
-#okta-sign-in.auth-container .okta-dropdown-option {
+#okta-sign-in.auth-container .okta-dropdown-option.dropdown-list-title:hover {
     /* -- Dropdown Colors -- */
-    /* background: transparent; */
-    /* border-bottom-color: #fff; */
+    background: transparent;
 }
 
-    #okta-sign-in.auth-container .okta-dropdown-option:hover {
-        /* -- Dropdown Colors -- */
-        /* background: #f9f9f9; */
-    }
-
-    #okta-sign-in.auth-container .okta-dropdown-option.dropdown-list-title:hover {
-        /* -- Dropdown Colors -- */
-        background: transparent;
-    }
-
-    #okta-sign-in.auth-container .okta-dropdown-option a {
-        /* -- Dropdown Colors -- */
-        color: #5e5e5e;
-    }
-
-#okta-sign-in.auth-container .okta-infobox-error {
-    /* -- Error Infobox Colors -- */
-    /* background-color: #fff; */
-    /* border: 1px solid #ddd; */
+#okta-sign-in.auth-container .okta-dropdown-option a {
+    /* -- Dropdown Colors -- */
+    color: #5e5e5e;
 }
-
-    #okta-sign-in.auth-container .okta-infobox-error:before {
-        /* -- Error Infobox Colors -- */
-        /* background-color: #e34843; */
-    }
-
-    #okta-sign-in.auth-container .okta-infobox-error .error-16:before {
-        /* -- Error Infobox Colors: error icon -- */
-        /* color: #fff; */
-        /* Use the rules below to replace an error icon in error infoboxes */
-        /* content: ''; */
-        /* width: 16px; */
-        /* height: 16px; */
-        /* background-image: none; */
-    }
 
 #okta-sign-in.auth-container .enroll-required-factor-list .enroll-factor-row-min .enroll-factor-description h3 {
     /* -- Enroll required factors, factors that are not the current step -- */
@@ -753,28 +720,6 @@
     color: #369f95;
 }
 
-#okta-sign-in.auth-container .okta-form-label-inline {
-    /* -- Input Fields -- */
-    /* background-color: #f2f2f2; */
-    /* border-color: #c8c8c8; */
-    /* color: #999; */
-}
-
-#okta-sign-in.auth-container .okta-form-input-error {
-    /* -- Input Fields: error highlight -- */
-    /* color: #d93934; */
-}
-
-    #okta-sign-in.auth-container .okta-form-input-error .error-16-small:before {
-        /* -- Input Fields: error icon -- */
-        /* color: #e34843; */
-        /* Use the rules below to replace input fields error icon */
-        /* content: ''; */
-        /* width: 16px; */
-        /* height: 16px; */
-        /* background-image: none; */
-    }
-
 #okta-sign-in.auth-container .chzn-single {
     /* -- Input Fields: Select Input -- */
     background-color: #fff;
@@ -798,156 +743,6 @@
     border-color: #888;
 }
 
-#okta-sign-in.auth-container .chzn-with-drop .chzn-results li {
-    /* -- Input Fields: Select Input -- */
-    /* border-color: #fff; */
-}
-
-#okta-sign-in.auth-container .chzn-with-drop .chzn-results .highlighted {
-    /* -- Input Fields: Select Input -- */
-    /* background-color: #f9f9f9; */
-}
-
-#okta-sign-in.auth-container .primary-auth {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .password-expired {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .password-reset {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .password-reset-email-sent {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .forgot-password {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .account-unlock {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .account-unlock-email-sent {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .recovery-challenge {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .recovery-loading {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .recovery-question {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .refresh-auth-state {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-choices {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-totp {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .barcode-totp {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .activate-totp {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-manual-totp {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .barcode-push {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .activate-push {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-manual-push {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-activation-link-sent {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-symantec {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-rsa {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-onprem {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-duo {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-sms {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-call {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .enroll-question {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-duo {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify {
-    /* -- Page specific top level selectors: all challenge pages except duo -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-totp {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-push {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-totp-inline {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-question {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-passcode {
-    /* -- Page specific top level selectors -- */
-}
-
-#okta-sign-in.auth-container .mfa-verify-password {
-    /* -- Page specific top level selectors -- */
-}
-
 .okta-sign-in-tooltip.qtip-custom {
     /* -- Tooltips -- */
     font-family: "montserrat", Arial, Helvetica, sans-serif;
@@ -955,24 +750,9 @@
     /* border-color: #303030; */
 }
 
-    .okta-sign-in-tooltip.qtip-custom .qtip-content {
-        /* -- Tooltips -- */
-        /* color: #f3f3f3; */
-    }
-
-    .okta-sign-in-tooltip.qtip-custom .qtip-titlebar {
-        /* -- Tooltips -- */
-        /* background-color: #404040 */
-    }
-
 .okta-sign-in-security-image-tooltip.qtip-custom {
     /* -- Tooltips -- */
     font-family: "montserrat", Arial, Helvetica, sans-serif;
     /* background-color: #4d4d4d; */
     /* border-color: #303030; */
 }
-
-    .okta-sign-in-security-image-tooltip.qtip-custom .qtip-content {
-        /* -- Tooltips -- */
-        /* color: #f3f3f3; */
-    }
