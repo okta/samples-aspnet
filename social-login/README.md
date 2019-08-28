@@ -1,6 +1,6 @@
-# ASP.NET MVC & Social Sign-In Example
+# ASP.NET MVC & Social Login Example
 
-This example shows you how to use the `Okta.AspNet` library to sign in a user via other identity providers such as Google or Facebook. The user's browser is first redirected to the self-hosted sign-in page on your ASP.NET MVC application with multiple login options. Once the user is successfully authenticated, ASP.NET MVC automatically populates `HttpContext.User` with the information that the identity provider sends back about the user.
+This example shows you how to use the `Okta.AspNet` library to log in a user via other identity providers such as Google or Facebook. The user's browser is first redirected to the self-hosted login page on your ASP.NET MVC application with multiple login options. Once the user is successfully authenticated, ASP.NET MVC automatically populates `HttpContext.User` with the information that the identity provider sends back about the user.
 
 
 ## Prerequisites
@@ -22,11 +22,11 @@ For step-by-step instructions, visit the Okta [ASP.NET MVC Guide]. The guide wil
 
 Now start your server and navigate to http://localhost:8080 in your browser.
 
-If you see a home page that allows you to sign in, then things are working!  Clicking the **Log in** link will redirect you to the self-hosted sign-in page with multiple sign-in options.
+If you see a home page that allows you to log in, then things are working!  Clicking the **Log in** link will redirect you to the self-hosted sign-in page with multiple sign-in options.
 
-If you want to sign in via Okta, you can sign in with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
+If you want to log in via Okta, you can log in with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
-**Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org.  You will be automatically signed in into your application as the same user that is using the Developer Console if you sign in via Okta.  You may want to use an incognito tab to test the flow from a blank slate.
+**Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org. When you log in via Okta, you will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
 
 [OIDC Middleware Library]: https://github.com/okta/okta-aspnet
 [Authorization Code Flow]: https://developer.okta.com/authentication-guide/implementing-authentication/auth-code
