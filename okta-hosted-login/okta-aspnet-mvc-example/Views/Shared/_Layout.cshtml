@@ -30,18 +30,18 @@
                     <li>
                         <p class="navbar-text">Hello, <b>@Context.User.Identity.Name</b></p>
                     </li>
-                    <li>@Html.ActionLink("Profile", "Profile", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "Profile", "Home", null, new {id = "profile-button" })</li>
                     <li>
-                        <a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log out</a>
+                        <a id="logout-button" onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Log out</a>
                     </li>
                 </ul>
-                            <form action="/Account/Logout" method="post" id="logout_form"></form>
+                <form action="/Account/Logout" method="post" id="logout_form"></form>
                 }
                 else
                 {
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>@Html.ActionLink("Log in", "Login", "Account")</li>
-                            </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Log in", "Login", "Account", null, new {id = "login-button" })</li>
+                    </ul>
                 }
             </div>
         </div>
