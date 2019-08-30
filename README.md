@@ -10,6 +10,7 @@ Please find the sample that fits your use-case from the table below.
 | [Resource Server](/resource-server) | This is a sample API resource server that shows you how to authenticate requests with access tokens that have been issued by Okta. | Single-Page applications. |
 | [Self-Hosted Login](/self-hosted-login) | An application server that uses a self-hosted login page on your ASP.NET MVC application. | Traditional web applications with server-side rendered pages. |
 | [Primary Authentication with Okta.Auth.Sdk](/primary-auth) | An application server that uses a self-hosted login page and `Okta.Auth.Sdk` on your ASP.NET MVC application. | Traditional web applications with server-side rendered pages. |
+| [Social Login](/social-login) | An application server that uses a self-hosted login page with multiple login options on your ASP.NET MVC application. | Traditional web applications with server-side rendered pages. |
 
 ## Contributing
  
