@@ -1,21 +1,22 @@
-﻿using System.Configuration;
+using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
-using Microsoft.Practices.Unity;
 using Okta.Auth.Sdk;
 using Okta.Sdk.Abstractions.Configuration;
+using Unity;
+using Unity.Injection;
 using Unity.Mvc5;
 
 namespace okta_aspnet_mvc_example
 {
-    [ExcludeFromCodeCoverage]
     public static class UnityConfig
     {
+        [ExcludeFromCodeCoverage]
         public static void RegisterComponents()
         {
-            var container = new UnityContainer();
+			var container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
@@ -28,6 +29,7 @@ namespace okta_aspnet_mvc_example
                     OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
                     Token = ConfigurationManager.AppSettings["okta:Token"],
                 })));
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
