@@ -20,11 +20,14 @@ Before running this sample, you will need the following:
 Clone this repo and replace the okta configuration placeholders in the `Web.Config` with your configuration values from the Okta Developer Console. 
 You can see all the available configuration options in the [Okta.Auth.Sdk GitHub].
 
-Now start your server and navigate to http://localhost:8080 in your browser.
+Now start your server and navigate to https://localhost:44314 in your browser.
 
 If you see a home page that allows you to login, then things are working!  Clicking the **Log in** link will redirect you to the self-hosted sign-in page.
 
 You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
+
+> **Note:** Because of recent changes in [Set-Cookie behavior (SameSite)](https://web.dev/samesite-cookies-explained) this code will only work properly if it's configured to use https. Check out [Work with SameSite cookies in ASP.NET](https://docs.microsoft.com/en-us/aspnet/samesite/system-web-samesite) for more details.
+
 
 [API token]:https://developer.okta.com/docs/api/getting_started/getting_a_token
 [Okta.Auth.Sdk GitHub]: https://github.com/okta/okta-auth-dotnet#configuration-reference
