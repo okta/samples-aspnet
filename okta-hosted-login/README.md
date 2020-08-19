@@ -17,13 +17,16 @@ Clone this repo and replace the okta configuration placeholders in the `Web.Conf
 You can see all the available configuration options in the [okta-aspnet GitHub](https://github.com/okta/okta-aspnet/blob/master/README.md).
 For step-by-step instructions, visit the Okta [ASP.NET MVC quickstart]. The quickstart will guide you through adding Okta login to your ASP.NET application.
 
-Now start your server and navigate to http://localhost:8080 in your browser.
+Now start your server and navigate to https://localhost:44314 in your browser. 
 
 If you see a home page that allows you to login, then things are working!  Clicking the **Log in** link will redirect you to the Okta hosted sign-in page.
 
 You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
-**Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org.  You will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
+> **Notes:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org.  You will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
+
+> Because of recent changes in Set-Cookie behavior (SameSite) this code will only work properly if it's configured to use https. Check out [Work with SameSite cookies in ASP.NET](https://docs.microsoft.com/en-us/aspnet/samesite/system-web-samesite) for more details.
+
 
 [OIDC Middleware Library]: https://github.com/okta/okta-aspnet
 [Authorization Code Flow]: https://developer.okta.com/authentication-guide/implementing-authentication/auth-code
