@@ -16,19 +16,18 @@ namespace okta_aspnet_mvc_example
         [ExcludeFromCodeCoverage]
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
-            // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication));
-            container.RegisterType<IAuthenticationClient>(new InjectionFactory(o => new AuthenticationClient(
+            container.RegisterFactory<IAuthenticationManager>(o => HttpContext.Current.GetOwinContext().Authentication);
+            container.RegisterFactory<IAuthenticationClient>(o => new AuthenticationClient(
                 new OktaClientConfiguration()
                 {
                     OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
                     Token = ConfigurationManager.AppSettings["okta:Token"],
-                })));
+                }));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

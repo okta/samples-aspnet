@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okta-aspnet-mvc-example", "okta-aspnet-mvc-example\okta-aspnet-mvc-example.csproj", "{69C63610-E9D2-43E3-8903-38693A1687C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okta-aspnet-mvc-example", "okta-aspnet-mvc-example\okta-aspnet-mvc-example.csproj", "{084CD02E-D5C8-4663-8A2C-B55FDE6BD82A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{69C63610-E9D2-43E3-8903-38693A1687C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69C63610-E9D2-43E3-8903-38693A1687C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69C63610-E9D2-43E3-8903-38693A1687C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69C63610-E9D2-43E3-8903-38693A1687C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084CD02E-D5C8-4663-8A2C-B55FDE6BD82A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084CD02E-D5C8-4663-8A2C-B55FDE6BD82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084CD02E-D5C8-4663-8A2C-B55FDE6BD82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084CD02E-D5C8-4663-8A2C-B55FDE6BD82A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
