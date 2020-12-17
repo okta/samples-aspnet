@@ -26,7 +26,6 @@ namespace okta_aspnet_mvc_example
                 new OktaClientConfiguration()
                 {
                     OktaDomain = ConfigurationManager.AppSettings["okta:OktaDomain"],
-                    Token = ConfigurationManager.AppSettings["okta:Token"],
                 }));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

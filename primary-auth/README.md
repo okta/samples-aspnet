@@ -10,14 +10,11 @@ If the user's password has expired, the user will be redirected to a change pass
 
 ## Prerequisites
 
-Before running this sample, you will need the following:
-
-* An Okta Developer Account, you can sign up for one at https://developer.okta.com/signup/.
-* An [API token]
+Before running this sample, you will need to have an Okta Developer Account. You can sign up for one at https://developer.okta.com/signup/.
 
 ## Running This Example
 
-Clone this repo and replace the okta configuration placeholders in the `Web.Config` with your configuration values from the Okta Developer Console. 
+Clone this repo and replace the configuration placeholder in the `Web.Config` with your Okta domain. 
 You can see all the available configuration options in the [Okta.Auth.Sdk GitHub].
 
 Now start your server and navigate to https://localhost:44314 in your browser.
