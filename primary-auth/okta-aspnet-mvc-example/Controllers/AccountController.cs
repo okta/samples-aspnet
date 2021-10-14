@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -68,6 +69,22 @@ namespace okta_aspnet_mvc_example.Controllers
                     Session["factors"] = factors?.Where(x => x.Enrollment.ToUpper() == "REQUIRED").ToList();
 
                     return RedirectToAction("SelectFactor", "Manage");
+                }
+                else if (authnResponse.AuthenticationStatus == AuthenticationStatus.MfaRequired)
+                {
+                    Session["stateToken"] = authnResponse.StateToken;
+
+                    var factors = authnResponse.Embedded.GetArrayProperty<Factor>("factors");
+
+                    var factor = factors.FirstOrDefault(x => x.Type == "sms");
+                    if (factor != null)
+                    {
+                        Session["isMfaRequiredFlow"] = true;
+                        Session["factorId"] = factor.Id;
+                        return RedirectToAction("VerifyFactor", "Manage");
+                    }
+
+                    throw new NotImplementedException($"Unhandled Factor during MFA Auth");
                 }
                 else if (authnResponse.AuthenticationStatus == AuthenticationStatus.PasswordExpired)
                 {

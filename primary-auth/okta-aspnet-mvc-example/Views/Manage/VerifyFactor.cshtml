@@ -1,6 +1,6 @@
 ﻿@model okta_aspnet_mvc_example.Models.VerifyFactorViewModel
 @{
-    ViewBag.Title = ViewBag.Title ?? "Enter your phone number.";
+    ViewBag.Title = ViewBag.Title ?? "Validate the code.";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -12,6 +12,7 @@
     <h5>Enter the passcode to continue.</h5>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.IsMfaRequiredFlow, Model.IsMfaRequiredFlow);
     <div class="form-group">
         <div class="col-md-10">
             <div class="row row-no-gutters">

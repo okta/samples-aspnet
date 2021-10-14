@@ -8,5 +8,7 @@ namespace okta_aspnet_mvc_example.Models
     public class VerifyFactorViewModel
     {
         public string Code { get; set; }
+
+        public bool IsMfaRequiredFlow { get; set; } = false;
     }
 }

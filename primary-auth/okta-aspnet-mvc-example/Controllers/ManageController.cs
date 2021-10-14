@@ -135,7 +135,26 @@ namespace okta_aspnet_mvc_example.Controllers
 
         public ActionResult VerifyFactor()
         {
-            return View();
+            var isMfaRequiredFlow = (bool)Session["isMfaRequiredFlow"];
+            
+            if (isMfaRequiredFlow)
+            {
+                // Assuming Phone: Send code to phone
+                var verifyFactorOptions = new VerifySmsFactorOptions
+                {
+                    StateToken = Session["stateToken"].ToString(),
+                    FactorId = Session["factorId"].ToString(),
+                };
+
+                _oktaAuthenticationClient.VerifyFactorAsync(verifyFactorOptions).ConfigureAwait(false);
+            }
+
+            var viewModel = new VerifyFactorViewModel
+            {
+                IsMfaRequiredFlow = isMfaRequiredFlow,
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -147,49 +166,87 @@ namespace okta_aspnet_mvc_example.Controllers
                 return View("VerifyFactor", model);
             }
 
-            var acitvateFactorOptions = new ActivateFactorOptions
-            {
-                PassCode = model.Code,
-                StateToken = Session["stateToken"].ToString(),
-                FactorId = Session["factorId"].ToString(),
-            };
 
-            try
+            if (model.IsMfaRequiredFlow)
             {
-                var authnResponse =
-                    await _oktaAuthenticationClient.ActivateFactorAsync(acitvateFactorOptions).ConfigureAwait(false);
-
-                if (authnResponse.AuthenticationStatus == AuthenticationStatus.MfaEnroll)
+                // Assuming Phone: Send code to phone
+                var verifyFactorOptions = new VerifySmsFactorOptions
                 {
-                    // check for skip
-                    if (authnResponse.Links["skip"] != null)
+                    StateToken = Session["stateToken"].ToString(),
+                    FactorId = Session["factorId"].ToString(),
+                    PassCode = model.Code,
+                };
+
+                try
+                {
+                    var authnResponse = await _oktaAuthenticationClient.VerifyFactorAsync(verifyFactorOptions)
+                        .ConfigureAwait(false);
+
+                    if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                     {
-                        authnResponse = await _oktaAuthenticationClient.SkipTransactionStateAsync(
-                            new TransactionStateOptions
-                            {
-                                StateToken = Session["stateToken"].ToString(),
-                            }).ConfigureAwait(false);
+                        var identity = new ClaimsIdentity(
+                            new[] { new Claim(ClaimTypes.Name, Session["userName"].ToString()) },
+                            DefaultAuthenticationTypes.ApplicationCookie);
+
+                        _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
+
+                        return RedirectToAction("Index", "Home");
                     }
 
+                    throw new NotImplementedException($"Unhandled Authentication Status {authnResponse.AuthenticationStatus}");
                 }
-
-                if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
+                catch (Exception exception)
                 {
-                    var identity = new ClaimsIdentity(
-                        new[] { new Claim(ClaimTypes.Name, Session["userName"].ToString()) },
-                        DefaultAuthenticationTypes.ApplicationCookie);
-
-                    _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
-
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                    return View("VerifyFactor", model);
                 }
-
-                throw new NotImplementedException($"Unhandled Authentication Status {authnResponse.AuthenticationStatus}");
             }
-            catch (Exception exception)
+            else
             {
-                ModelState.AddModelError(string.Empty, exception.Message);
-                return View("VerifyFactor", model);
+                var acitvateFactorOptions = new ActivateFactorOptions
+                {
+                    PassCode = model.Code,
+                    StateToken = Session["stateToken"].ToString(),
+                    FactorId = Session["factorId"].ToString(),
+                };
+
+                try
+                {
+                    var authnResponse =
+                        await _oktaAuthenticationClient.ActivateFactorAsync(acitvateFactorOptions).ConfigureAwait(false);
+
+                    if (authnResponse.AuthenticationStatus == AuthenticationStatus.MfaEnroll)
+                    {
+                        // check for skip
+                        if (authnResponse.Links["skip"] != null)
+                        {
+                            authnResponse = await _oktaAuthenticationClient.SkipTransactionStateAsync(
+                                new TransactionStateOptions
+                                {
+                                    StateToken = Session["stateToken"].ToString(),
+                                }).ConfigureAwait(false);
+                        }
+
+                    }
+
+                    if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
+                    {
+                        var identity = new ClaimsIdentity(
+                            new[] { new Claim(ClaimTypes.Name, Session["userName"].ToString()) },
+                            DefaultAuthenticationTypes.ApplicationCookie);
+
+                        _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    throw new NotImplementedException($"Unhandled Authentication Status {authnResponse.AuthenticationStatus}");
+                }
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                    return View("VerifyFactor", model);
+                }
             }
         }
     }
