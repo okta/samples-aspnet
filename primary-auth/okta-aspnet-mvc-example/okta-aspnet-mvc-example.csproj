@@ -252,7 +252,11 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\EnrollSmsViewModel.cs" />
+    <Compile Include="Models\FactorViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\SelectFactorViewModel.cs" />
+    <Compile Include="Models\VerifyFactorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -299,6 +303,9 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\SelectFactor.cshtml" />
+    <Content Include="Views\Manage\EnrollSms.cshtml" />
+    <Content Include="Views\Manage\VerifyFactor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

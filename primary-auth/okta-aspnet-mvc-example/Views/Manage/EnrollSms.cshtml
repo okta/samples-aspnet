@@ -1,0 +1,34 @@
+﻿@model okta_aspnet_mvc_example.Models.EnrollSmsViewModel
+@{
+    ViewBag.Title = ViewBag.Title ?? "Enter your phone number.";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("EnrollSmsAsync", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Set up phone authentication</h4>
+    <h5>Format: {+}{country code}{area code}{number}</h5>
+    <h5>For example: +1555666777</h5>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10">
+            <div>
+                @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+            </div>
+            <div>
+                @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Submit" class="btn btn-primary btn-stretch-wide" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
