@@ -249,5 +249,128 @@ namespace okta_aspnet_mvc_example.Controllers
                 }
             }
         }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPasswordAsync(ForgotPasswordViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("ForgotPassword", model);
+            }
+
+            try
+            {
+                var authResponse = await _oktaAuthenticationClient.ForgotPasswordAsync(new ForgotPasswordOptions
+                {
+                    FactorType = FactorType.Email,
+                    UserName = model.UserName,
+                }).ConfigureAwait(false);
+
+                return RedirectToAction("VerifyRecoveryToken", "Manage");
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+                return View("ForgotPassword", model);
+            }
+        }
+
+
+        public ActionResult VerifyRecoveryToken()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifyRecoveryTokenAsync(VerifyRecoveryTokenViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("VerifyRecoveryToken", model);
+            }
+
+            try
+            {
+                var authResponse = await _oktaAuthenticationClient.VerifyRecoveryTokenAsync(
+                    new VerifyRecoveryTokenOptions
+                {
+                    RecoveryToken = model.RecoveryToken,
+                }).ConfigureAwait(false);
+
+                if (authResponse.AuthenticationStatus == AuthenticationStatus.Recovery)
+                {
+
+                    var question =  authResponse.Embedded.GetProperty<Resource>("user")?
+                        .GetProperty<Resource>("recovery_question")?
+                        .GetProperty<string>("question");
+
+                    Session["securityQuestion"] = question;
+                    Session["stateToken"] = authResponse.StateToken;
+
+                    return RedirectToAction("VerifySecurityQuestion", "Manage");
+                }
+
+                throw new NotImplementedException($"Unhandled Authentication Status {authResponse.AuthenticationStatus}");
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+                return View("VerifyRecoveryToken", model);
+            }
+        }
+
+        public ActionResult VerifySecurityQuestion()
+        {
+            var viewModel = new VerifySecurityQuestionViewModel
+            {
+                Question = Session["securityQuestion"]?.ToString(),
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> VerifySecurityQuestionAsync(VerifySecurityQuestionViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("VerifySecurityQuestion", model);
+            }
+
+            try
+            {
+                var authResponse = await _oktaAuthenticationClient.VerifyFactorAsync(
+                    new VerifySecurityQuestionFactorOptions
+                    {
+                        Answer = model.Answer,
+                        StateToken = Session["stateToken"].ToString(),
+
+                    }).ConfigureAwait(false);
+
+                if (authResponse.AuthenticationStatus == AuthenticationStatus.PasswordReset)
+                {
+
+                    return RedirectToAction("ChangePassword", "Manage");
+                }
+
+                throw new NotImplementedException($"Unhandled Authentication Status {authResponse.AuthenticationStatus}");
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+                return View("VerifySecurityQuestion", model);
+            }
+        }
     }
 }
