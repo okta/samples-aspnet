@@ -184,8 +184,13 @@ namespace okta_aspnet_mvc_example.Controllers
 
                     if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                     {
+                        var username = authnResponse.Embedded
+                            .GetProperty<Resource>("user")
+                            .GetProperty<Resource>("profile")
+                            .GetProperty<string>("login");
+
                         var identity = new ClaimsIdentity(
-                            new[] { new Claim(ClaimTypes.Name, Session["userName"].ToString()) },
+                            new[] { new Claim(ClaimTypes.Name, username) },
                             DefaultAuthenticationTypes.ApplicationCookie);
 
                         _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
@@ -231,8 +236,13 @@ namespace okta_aspnet_mvc_example.Controllers
 
                     if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                     {
+                        var username = authnResponse.Embedded
+                            .GetProperty<Resource>("user")
+                            .GetProperty<Resource>("profile")
+                            .GetProperty<string>("login");
+
                         var identity = new ClaimsIdentity(
-                            new[] { new Claim(ClaimTypes.Name, Session["userName"].ToString()) },
+                            new[] { new Claim(ClaimTypes.Name, username) },
                             DefaultAuthenticationTypes.ApplicationCookie);
 
                         _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
@@ -308,7 +318,6 @@ namespace okta_aspnet_mvc_example.Controllers
 
                 if (authResponse.AuthenticationStatus == AuthenticationStatus.Recovery)
                 {
-
                     var question =  authResponse.Embedded.GetProperty<Resource>("user")?
                         .GetProperty<Resource>("recovery_question")?
                         .GetProperty<string>("question");
@@ -350,8 +359,8 @@ namespace okta_aspnet_mvc_example.Controllers
 
             try
             {
-                var authResponse = await _oktaAuthenticationClient.VerifyFactorAsync(
-                    new VerifySecurityQuestionFactorOptions
+                var authResponse = await _oktaAuthenticationClient.AnswerRecoveryQuestionAsync(
+                    new AnswerRecoveryQuestionOptions
                     {
                         Answer = model.Answer,
                         StateToken = Session["stateToken"].ToString(),
@@ -361,7 +370,7 @@ namespace okta_aspnet_mvc_example.Controllers
                 if (authResponse.AuthenticationStatus == AuthenticationStatus.PasswordReset)
                 {
 
-                    return RedirectToAction("ChangePassword", "Manage");
+                    return RedirectToAction("ResetPassword", "Manage");
                 }
 
                 throw new NotImplementedException($"Unhandled Authentication Status {authResponse.AuthenticationStatus}");
@@ -370,6 +379,56 @@ namespace okta_aspnet_mvc_example.Controllers
             {
                 ModelState.AddModelError(string.Empty, exception.Message);
                 return View("VerifySecurityQuestion", model);
+            }
+        }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPasswordAsync(ResetPasswordViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("ResetPassword", model);
+            }
+
+            try
+            {
+                var authResponse = await _oktaAuthenticationClient.ResetPasswordAsync(
+                    new ResetPasswordOptions()
+                    {
+                        NewPassword = model.NewPassword,
+                        StateToken = Session["stateToken"].ToString(),
+
+                    }).ConfigureAwait(false);
+
+                if (authResponse.AuthenticationStatus == AuthenticationStatus.Success)
+                {
+                    var username = authResponse.Embedded
+                        .GetProperty<Resource>("user")
+                        .GetProperty<Resource>("profile")
+                        .GetProperty<string>("login");
+
+                    var identity = new ClaimsIdentity(
+                        new[] { new Claim(ClaimTypes.Name, username) },
+                        DefaultAuthenticationTypes.ApplicationCookie);
+
+                    _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = (bool)Session["rememberMe"] }, identity);
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                throw new NotImplementedException($"Unhandled Authentication Status {authResponse.AuthenticationStatus}");
+            }
+            catch (Exception exception)
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+                return View("ResetPassword", model);
             }
         }
     }

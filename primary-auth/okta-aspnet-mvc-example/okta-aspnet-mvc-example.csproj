@@ -256,6 +256,7 @@
     <Compile Include="Models\FactorViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\SelectFactorViewModel.cs" />
     <Compile Include="Models\VerifyFactorViewModel.cs" />
     <Compile Include="Models\VerifyRecoveryTokenViewModel.cs" />
@@ -312,6 +313,7 @@
     <Content Include="Views\Manage\ForgotPassword.cshtml" />
     <Content Include="Views\Manage\VerifyRecoveryToken.cshtml" />
     <Content Include="Views\Manage\VerifySecurityQuestion.cshtml" />
+    <Content Include="Views\Manage\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
