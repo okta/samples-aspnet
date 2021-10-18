@@ -46,6 +46,17 @@
                 </div>
             }
         </section>
+        <section id="forgotPasswordForm">
+            @using (Html.BeginForm("ForgotPassword", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Forgot Password?" class="btn btn-default btn-stretch-wide" id="ForgotPasswordBtn"/>
+                    </div>
+                </div>
+            }
+        </section>
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">

@@ -1,4 +1,7 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -47,7 +50,7 @@ namespace okta_aspnet_mvc_example.Controllers
             try
             {
                 var authnResponse = await _oktaAuthenticationClient.AuthenticateAsync(authnOptions).ConfigureAwait(false);
-
+                Session["rememberMe"] = model.RememberMe;
                 if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                 {
                     var identity = new ClaimsIdentity(
@@ -57,6 +60,31 @@ namespace okta_aspnet_mvc_example.Controllers
                     _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = model.RememberMe }, identity);
 
                     return RedirectToAction("Index", "Home");
+                }
+                else if (authnResponse.AuthenticationStatus == AuthenticationStatus.MfaEnroll)
+                {
+                    Session["stateToken"] = authnResponse.StateToken;
+                    var factors = authnResponse.Embedded.GetArrayProperty<Factor>("factors");
+                    Session["factors"] = factors?.Where(x => x.Enrollment.ToUpper() == "REQUIRED").ToList();
+
+                    return RedirectToAction("SelectFactor", "Manage");
+                }
+                else if (authnResponse.AuthenticationStatus == AuthenticationStatus.MfaRequired)
+                {
+                    Session["stateToken"] = authnResponse.StateToken;
+
+                    var allFactors = authnResponse.Embedded.GetArrayProperty<Factor>("factors");
+
+                    var defaultMfaFactor = allFactors.FirstOrDefault(x => x.Type == "sms" || x.Type == "email");
+
+                    if (defaultMfaFactor != null)
+                    {
+                        Session["isMfaRequiredFlow"] = true;
+                        Session["factorId"] = defaultMfaFactor.Id;
+                        return RedirectToAction("VerifyFactor", "Manage");
+                    }
+
+                    throw new NotImplementedException($"Unhandled Factor during MFA Auth");
                 }
                 else if (authnResponse.AuthenticationStatus == AuthenticationStatus.PasswordExpired)
                 {

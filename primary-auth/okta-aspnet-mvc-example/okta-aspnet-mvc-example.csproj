@@ -273,7 +273,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\EnrollSmsViewModel.cs" />
+    <Compile Include="Models\FactorViewModel.cs" />
+    <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\SelectFactorViewModel.cs" />
+    <Compile Include="Models\VerifyFactorViewModel.cs" />
+    <Compile Include="Models\VerifyRecoveryTokenViewModel.cs" />
+    <Compile Include="Models\VerifySecurityQuestionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +325,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\SelectFactor.cshtml" />
+    <Content Include="Views\Manage\EnrollSms.cshtml" />
+    <Content Include="Views\Manage\VerifyFactor.cshtml" />
+    <Content Include="Views\Manage\ForgotPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyRecoveryToken.cshtml" />
+    <Content Include="Views\Manage\VerifySecurityQuestion.cshtml" />
+    <Content Include="Views\Manage\ResetPassword.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
