@@ -50,7 +50,6 @@ namespace okta_aspnet_mvc_example.Controllers
             try
             {
                 var authnResponse = await _oktaAuthenticationClient.AuthenticateAsync(authnOptions).ConfigureAwait(false);
-                Session["userName"] = model.UserName;
                 Session["rememberMe"] = model.RememberMe;
                 if (authnResponse.AuthenticationStatus == AuthenticationStatus.Success)
                 {
