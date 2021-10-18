@@ -169,8 +169,8 @@ namespace okta_aspnet_mvc_example.Controllers
 
             if (model.IsMfaRequiredFlow)
             {
-                // Assuming Phone: Send code to phone
-                var verifyFactorOptions = new VerifySmsFactorOptions
+                // Valid for both SMS and/or email
+                var verifyFactorOptions = new VerifyTotpFactorOptions
                 {
                     StateToken = Session["stateToken"].ToString(),
                     FactorId = Session["factorId"].ToString(),

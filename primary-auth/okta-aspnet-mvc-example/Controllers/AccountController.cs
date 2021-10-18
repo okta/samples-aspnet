@@ -74,13 +74,14 @@ namespace okta_aspnet_mvc_example.Controllers
                 {
                     Session["stateToken"] = authnResponse.StateToken;
 
-                    var factors = authnResponse.Embedded.GetArrayProperty<Factor>("factors");
+                    var allFactors = authnResponse.Embedded.GetArrayProperty<Factor>("factors");
 
-                    var factor = factors.FirstOrDefault(x => x.Type == "sms");
-                    if (factor != null)
+                    var defaultMfaFactor = allFactors.FirstOrDefault(x => x.Type == "sms" || x.Type == "email");
+
+                    if (defaultMfaFactor != null)
                     {
                         Session["isMfaRequiredFlow"] = true;
-                        Session["factorId"] = factor.Id;
+                        Session["factorId"] = defaultMfaFactor.Id;
                         return RedirectToAction("VerifyFactor", "Manage");
                     }
 
