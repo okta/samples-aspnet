@@ -107,8 +107,13 @@ namespace okta_aspnet_mvc_example.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public async Task<ActionResult> LogOffAsync()
         {
+            await _oktaAuthenticationClient.CancelTransactionStateAsync(
+                new TransactionStateOptions
+                {
+                    StateToken = Session["stateToken"]?.ToString(),
+                });
             _authenticationManager.SignOut();
             return RedirectToAction("Login", "Account");
         }
