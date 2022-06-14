@@ -25,7 +25,6 @@ A typical resource-server requires a frontend and a backend application, so you 
 
 Clone this repo and replace the okta configuration placeholders in the `Web.Config` with your configuration values from the Okta Developer Console. 
 You can see all the available configuration options in the [okta-aspnet GitHub](https://github.com/okta/okta-aspnet/blob/master/README.md).
-For step-by-step instructions, visit the Okta [ASP.NET Web API quickstart].
 
 > **NOTE:** The above command starts the resource server on port 8000. You can browse to `http://localhost:8000/api/messages` to ensure it has started. If you get the message "Authorization has been denied for this request", it indicates that the resource server is up. You will need to pass an access token to access the resource, which will be done by the front-end below.
 
@@ -39,4 +38,3 @@ If you want to use one of our front-end samples, open a new terminal window and 
 [Okta Vue Sample Apps]: https://github.com/okta/samples-js-vue
 [Okta React Sample Apps]: https://github.com/okta/samples-js-react
 [OIDC SPA Setup Instructions]: https://developer.okta.com/authentication-guide/implementing-authentication/implicit#1-setting-up-your-application
-[ASP.NET Web API quickstart]: https://developer.okta.com/quickstart/#/widget/dotnet/aspnet4
