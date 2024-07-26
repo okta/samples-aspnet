@@ -6,7 +6,9 @@
 
 <h2>@ViewBag.Title</h2>
 
-<dl class="dl-horizontal">
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <dl class="dl-horizontal">
     @foreach (var claim in Model)
     {
         <dt title="@claim.Type">
@@ -22,4 +24,9 @@
 
         <dd id="@String.Format("claim-{0}", claim.Type)">@claim.Value</dd>
     }
-</dl>
+    </dl>
+} else {
+    <ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+    </ul>
+}
