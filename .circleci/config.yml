@@ -80,6 +80,11 @@ jobs:
 
 
 workflows:
+  "Malware Scanner":
+    jobs:
+      - reversing-labs:
+          context:
+            - okta-dcp 
   # See OKTA-624620
   semgrep:
     jobs:
