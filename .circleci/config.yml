@@ -84,7 +84,7 @@ workflows:
     jobs:
       - reversing-labs:
           context:
-            - okta-dcp 
+            - static-analysis 
   # See OKTA-624620
   semgrep:
     jobs:
