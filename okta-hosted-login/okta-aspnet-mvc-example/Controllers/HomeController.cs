@@ -28,7 +28,18 @@ namespace okta_aspnet_mvc_example.Controllers
         [Authorize]
         public ActionResult Profile()
         {
-            return View(HttpContext.GetOwinContext().Authentication.User.Claims);
+            var user = HttpContext.GetOwinContext().Authentication.User;
+            var claims = user.Claims;
+            var accessToken = user.Claims.FirstOrDefault(c => c.Type == "access_token")?.Value;
+            var idToken = user.Claims.FirstOrDefault(c => c.Type == "id_token")?.Value;
+            Console.WriteLine("This is accessToken: " + accessToken); // this will be null
+            Console.WriteLine("This is idToken: " + idToken); // this will be null
+
+            ViewBag.AccessToken = accessToken;
+            ViewBag.IdToken = idToken;
+
+            return View(claims);
         }
+
     }
 }
